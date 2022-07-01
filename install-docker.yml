@@ -1,0 +1,52 @@
+---
+#             B6.4 practice
+- name:       Install and run Docker
+  hosts:            all
+  become:           yes
+
+  tasks:
+   - name:          1.1Update  the repository
+     apt:
+       update_cache: yes
+   - name:          1.2Set up the repository
+     apt:
+       pkg:
+       - ca-certificates
+       - curl
+       - gnupg
+       - lsb-release
+
+
+   - name:         2.1Create keyring directory   Add Docker’s official GPG key
+     file:
+        path:     /etc/apt/keyrings
+        state:    directory
+   - name:         2.2Copy GPG key
+     uri:
+        url:     https://download.docker.com/linux/ubuntu/gpg
+        dest:    /etc/apt/keyrings
+   - name:         2.3Add key
+     command:     
+        cmd:      gpg -o /etc/apt/keyrings/docker.gpg --dearmor /etc/apt/keyrings/gpg 
+        
+        
+   - name:         2.31Add key - import
+     command:
+        cmd:      gpg --import /etc/apt/keyrings/docker.gpg
+
+ 
+     
+   - name:        3.Set Up the repository
+     command:
+        cmd:        add-apt-repository --yes "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
+       
+   - name:        3.1Apt Update
+     command:   apt update  
+
+   - name:       4.Install Docker
+     apt:
+        pkg:
+        - docker-ce
+        - docker-ce-cli
+        - containerd.io
+        - docker-compose-plugin
