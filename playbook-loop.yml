@@ -1,15 +1,25 @@
 ---
  - name:      Loop test playbook
    hosts:     all
-   become:    yes
+#   become:    yes
 
 
    tasks:
    - name:    Say Hello in loop
      debug:   msg="Hello to {{ item }}"
-     with_items:
+     loop:
        - "Vasia"
        - "Petya"
        - "Prohor"
-       - "Masha"
-       - "Olya"
+#       - "Masha"
+#       - "Olya"
+   - name:         use Until loop
+     shell:     echo -n Z >> myfile.txt && cat myfile.txt
+     register:  result
+     delay:     1
+     retries:   10
+     until: result.stdout.find("ZZZZ") == false
+   
+   - debug:
+        var:     result.stdout     
+        
