@@ -1,0 +1,16 @@
+---
+# B 6.5 practice
+- name:           Create user, set ssh-key
+  gather_facts:   no
+  hosts:          all
+  become:         yes
+
+  tasks:
+   - name:          Create user.
+     user:
+       name:         user1
+       comment:      created_by_ansible
+       shell:        /bin/bash
+       generate_ssh_key: yes
+       ssh_key_file:     .ssh/id_rsa1
+       state:         present
