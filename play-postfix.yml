@@ -1,0 +1,21 @@
+---
+# B 6.5 practice, part 2, install or remove postfix depend on tags.
+- name:             install/remove postfix 
+  gather_facts:     no
+  hosts:            all
+  become:           yes
+
+  tasks:
+   - name:          install_postfix
+     apt:
+        name:     postfix
+        state:    present
+        update_cache: yes
+     tags:       init
+
+   - name:           remove postfix
+     apt:
+       name:  postfix
+       state: absent
+     tags:    drop 
+
