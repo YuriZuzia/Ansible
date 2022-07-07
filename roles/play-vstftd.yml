@@ -1,0 +1,9 @@
+---
+# B6.6.1 practice: install vsftpd drvice by Ansible role
+- name:  Install vsftpd - main
+  hosts:  all
+  gather_facts: no
+  become:  yes
+
+  roles:
+    - vsftpd

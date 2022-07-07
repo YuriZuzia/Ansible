@@ -1,0 +1,4 @@
+---
+ansible_user                          :       yuri
+ansible_ssh_pivate_key_files          :       ~/.ssh/id_rsa
+...

@@ -1,0 +1,15 @@
+---
+# tasks file for vsftpd
+- name:  install vsftpd
+  apt:
+    name:  vsftpd
+    state: present
+
+- name:  init config - copy new config and ovewrite old one
+  copy:
+    src:  vsftpd.conf
+    dest: /etc/vsftpd.conf
+    follow: yes
+    backup: yes
+  notify: restart vsftpd
+
