@@ -1,0 +1,9 @@
+---
+# B6.9.2 p.1 practice: install dnsmask by Ansible role
+- name:  Install dnsmasq - main
+  hosts:  all
+  gather_facts: no
+  become:  yes
+
+  roles:
+    - dnsmasq

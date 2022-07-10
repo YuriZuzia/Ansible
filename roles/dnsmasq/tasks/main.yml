@@ -1,0 +1,28 @@
+---
+# tasks file for dnsmasq
+# 1. disable system-resolved
+# 2. remove link to resolv.conf file
+# 3. install dnsmasq via standard repository
+ - name:   1. disable system-resolved
+   service:
+     name:  system-resolved
+     state: stopped
+     enabled: no
+
+ - name:   2. remove symlink to resolv.conf
+   file:
+     path:  /etc/resolv.conf
+     state: absent
+ - name:   2.1 copy new resolv.conf
+   copy:
+     src:  resolv.conf
+     dest: /etc/resolv.conf
+     backup: yes
+
+ - name:   3. Install dnsmasq
+   apt:
+     name:  dnsmasq
+     state: present
+     update_cache: yes
+
+     
