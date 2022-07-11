@@ -1,0 +1,30 @@
+---
+# B 6.9.2 practice, p.2 Create users in superusers group
+ - name:     create user and groups
+   hosts:    all
+   gather_facts:  no
+   become:   yes
+
+   tasks:
+    - name:    create superuser groups
+      group:
+        name:    superusers
+        state:   present
+
+    - name:   create users
+      user:
+        name: "{{ item }}"
+        append:  yes
+        groups:   
+          - superusers
+          - sudo
+        comment: Ansible created users
+        create_home:   yes
+        #ssh_key_file:  "{{item}}_rsa"
+      loop:
+        - user2
+        - user3
+
+
+
+        
