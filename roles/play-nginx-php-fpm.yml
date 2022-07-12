@@ -1,0 +1,9 @@
+---
+#  6.9.2 practice, p.3 Ansible role installs nginx, php-fpm
+- name:   main
+  hosts:  all
+  gather_facts: yes
+  become: yes
+
+  roles:
+   - nginx-php-fpm
