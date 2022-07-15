@@ -31,7 +31,15 @@
      state: present
      update_cache: yes
 
-#- name:    2. Configuring nginx for work with php-fpm
-  
+- name:    2.1 Configuring nginx for work with php-fpm
+  copy:
+    src:  nginx-fpm.conf
+    dest: /etc/nginx/conf.d/
+  notify:  restart nginx
 
+- name:    2.2 Copy start page for nginx
+  copy:
+    src:   index.php
+    dest:  /usr/share/nginx/html/ 
+  notify:   restart nginx 
 
