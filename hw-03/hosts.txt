@@ -1,7 +1,7 @@
 [web]
 vm1 ansible_host=vm1
 [database]
-vm1 ansible_host=vm1
+vm1 ansible_host=vm1    postgresql_ver=11 postgresql_data=/var/lib/postgresql/11/pgdata
 [app]
 vm2 ansible_host=vm2
 vm3 ansible_host=vm3
