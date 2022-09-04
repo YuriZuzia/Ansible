@@ -1,0 +1,3 @@
+[staging_servers]
+vm ansible_host=51.250.108.142 postgresql_ver=12
+
